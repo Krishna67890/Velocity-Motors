@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Outfit:wght@100;400;700;900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #007AFF;
+  --secondary: #5856D6;
+  --accent: #FF2D55;
+  --bg: #000000;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Space Grotesk', sans-serif;
+  background-color: var(--bg);
+  color: white;
+  overflow-x: hidden;
+  cursor: auto;
+}
+
+h1, h2, h3, h4, .outfit {
+  font-family: 'Outfit', sans-serif;
+}
+
+/* Background - Pure black for absolute clarity */
+.bg-glow {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  z-index: -2;
+  pointer-events: none;
+}
+
+/* Modern Components - Sharp cards with NO blur */
+.glass {
+  background: #0f0f0f; /* Solid dark background for visibility */
+  backdrop-filter: none !important; /* Removed all blur */
+  border: 1px solid #333; /* Distinct border */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.hover-card {
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.hover-card:hover {
+  background: #1a1a1a;
+  transform: translateY(-10px);
+  border-color: var(--primary);
+  box-shadow: 0 20px 40px rgba(0, 122, 255, 0.2);
+}
+
+.gradient-text {
+  background: linear-gradient(to right, #ffffff 0%, #007AFF 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.btn-primary {
+  @apply relative overflow-hidden px-8 py-4 rounded-full font-bold transition-all duration-300 flex items-center gap-3 justify-center;
+  background: var(--primary);
+  color: white;
+}
+
+.btn-primary:hover {
+  @apply shadow-[0_0_25px_rgba(0,122,255,0.5)] scale-105;
+  background: white;
+  color: black;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #000;
+}
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 10px;
+}
+
+a, button, [role="button"] {
+  cursor: pointer;
+}
+
+/* Image sharpening */
+img {
+  image-rendering: -webkit-optimize-contrast;
+  object-fit: cover;
+}
+
+.noise {
+  display: none !important;
+}
