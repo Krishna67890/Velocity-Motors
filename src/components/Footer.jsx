@@ -66,6 +66,7 @@ const Footer = () => {
             </ul>
           </div>
 
+          {/* Network Column */}
           <div>
             <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-primary mb-10">Network</h4>
             <ul className="space-y-5">
@@ -80,6 +81,7 @@ const Footer = () => {
             </ul>
           </div>
 
+          {/* Support Column */}
           <div>
             <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-primary mb-10">Support</h4>
             <ul className="space-y-5">
@@ -122,7 +124,7 @@ const Footer = () => {
         </div>
 
         <div className="mt-16 text-center">
-           <p className="text-[9px] font-black uppercase tracking-[0.6em] text-gray-700">&copy; 2024 Velocity Motors • Drive the electric Future</p>
+           <p className="text-[9px] font-black uppercase tracking-[0.6em] text-gray-700">&copy; 2026 Velocity Motors • Drive the electric Future</p>
         </div>
       </div>
     </footer>
