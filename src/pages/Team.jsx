@@ -2,13 +2,17 @@ import { useEffect } from 'react';
 import gsap from 'gsap';
 import { Shield, Wrench, Truck, Briefcase, UserCheck } from 'lucide-react';
 
+// Import local assets
+import boyImg from '../../Assets/Boy.jpg';
+import krishnaImg from '../../Assets/Krishna patil.jpg';
+
 const team = [
   {
     name: "Yash Baviskar",
     role: "Founder & Visionary Leader",
     icon: <Shield className="text-primary" />,
     bio: "The primary architect of Velocity Motors, driving the mission to electrify every Indian household with sustainable luxury.",
-    img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=1974",
+    img: boyImg, // Default boy logo
     color: "from-blue-600/20 to-blue-900/20"
   },
   {
@@ -16,7 +20,7 @@ const team = [
     role: "Co-Founder & Technical Lead",
     icon: <Wrench className="text-accent" />,
     bio: "Master of high-voltage systems. Jayesh leads the Master Garage, ensuring every vehicle's health and performance is peak.",
-    img: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=1974",
+    img: boyImg, // Default boy logo
     color: "from-red-600/20 to-red-900/20"
   },
   {
@@ -24,7 +28,7 @@ const team = [
     role: "Co-Founder & Logistics Head",
     icon: <Truck className="text-blue-500" />,
     bio: "Expert in vehicle transportation and sales strategies. Krishna bridges the gap between our tech and our elite customers.",
-    img: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=1974",
+    img: krishnaImg, // Specific Krishna Patil logo
     connect: "https://github.com/krishna67890",
     profile: "https://krishna-patil-rajput.vercel.app/",
     color: "from-cyan-600/20 to-cyan-900/20"
@@ -34,7 +38,7 @@ const team = [
     role: "Co-Founder & Business Manager",
     icon: <Briefcase className="text-purple-500" />,
     bio: "Showroom operations and financial mastermind. Kashyap ensures seamless transactions and robust business growth.",
-    img: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=1974",
+    img: boyImg, // Default boy logo
     color: "from-purple-600/20 to-purple-900/20"
   },
   {
@@ -42,7 +46,7 @@ const team = [
     role: "Co-Founder & Operations Director",
     icon: <UserCheck className="text-emerald-500" />,
     bio: "Guardian of showroom discipline and customer care. Shivhar maintains the high standards and elite hospitality of our brand.",
-    img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=1974",
+    img: boyImg, // Default boy logo
     color: "from-emerald-600/20 to-emerald-900/20"
   }
 ];
@@ -82,19 +86,19 @@ const Team = () => {
                   <img src={m.img} alt={m.name} className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700" />
                 </div>
 
-                <h3 className="outfit text-2xl font-black italic mb-2 tracking-tight uppercase leading-none">{m.name}</h3>
+                <h3 className="outfit text-2xl font-black italic mb-2 tracking-tight uppercase leading-none text-white">{m.name}</h3>
                 <p className="text-primary font-black tracking-widest text-[10px] uppercase mb-6">{m.role}</p>
 
                 <p className="text-gray-300 text-sm italic leading-relaxed mb-8 flex-grow">"{m.bio}"</p>
 
                 {m.connect && m.profile ? (
                   <div className="pt-8 border-t border-white/5 flex gap-4 opacity-0 group-hover:opacity-100 transition-all translate-y-4 group-hover:translate-y-0">
-                    <a href={m.connect} target="_blank" rel="noopener noreferrer" className="text-[10px] font-black uppercase tracking-widest hover:text-primary transition-colors">Connect</a>
+                    <a href={m.connect} target="_blank" rel="noopener noreferrer" className="text-[10px] font-bold uppercase tracking-widest hover:text-primary transition-colors text-white">Connect</a>
                     <div className="w-[1px] h-3 bg-white/10"></div>
-                    <a href={m.profile} target="_blank" rel="noopener noreferrer" className="text-[10px] font-black uppercase tracking-widest hover:text-primary transition-colors">Profile</a>
+                    <a href={m.profile} target="_blank" rel="noopener noreferrer" className="text-[10px] font-black uppercase tracking-widest hover:text-primary transition-colors text-white">Profile</a>
                   </div>
                 ) : (
-                  <div className="pt-8 border-t border-white/5 opacity-30 italic text-[10px] uppercase tracking-widest font-bold">
+                  <div className="pt-8 border-t border-white/5 opacity-30 italic text-[10px] uppercase tracking-widest font-bold text-white">
                     Founding Member
                   </div>
                 )}

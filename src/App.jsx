@@ -17,6 +17,8 @@ import Booking from './pages/Booking';
 import Innovation from './pages/Innovation';
 import Services from './pages/Services';
 import VehicleDamagePart from './pages/VehicleDamagePart';
+import Parents from './pages/Parents';
+import Labs from './pages/Labs';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -71,6 +73,8 @@ function App() {
             <Route path="/services" element={<Services />} />
             <Route path="/repair-damage" element={<VehicleDamagePart />} />
             <Route path="/book" element={<Booking />} />
+            <Route path="/parents" element={<Parents />} />
+            <Route path="/labs" element={<Labs />} />
             <Route path="/showroom" element={<Navigate to="/cars" replace />} />
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>

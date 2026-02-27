@@ -14,7 +14,10 @@ import {
   Activity,
   Cpu,
   ShieldCheck,
-  Search
+  Search,
+  Settings,
+  Phone,
+  Navigation
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -30,7 +33,11 @@ const repairOptions = [
 const VehicleDamagePart = () => {
   const [selectedRepairs, setSelectedRepairs] = useState([]);
   const [submitted, setSubmitted] = useState(false);
-  const [scenario, setScenario] = useState('');
+  const [formData, setFormData] = useState({
+    scenario: '',
+    location: '',
+    phone: ''
+  });
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -39,6 +46,11 @@ const VehicleDamagePart = () => {
       { opacity: 1, y: 0, duration: 0.8, stagger: 0.1, ease: "power2.out" }
     );
   }, []);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
 
   const toggleRepair = (id) => {
     setSelectedRepairs(prev =>
@@ -59,14 +71,14 @@ const VehicleDamagePart = () => {
 
   if (submitted) {
     return (
-      <div className="pt-40 pb-20 px-6 min-h-screen bg-black flex items-center justify-center">
+      <div className="pt-40 pb-20 px-6 min-h-screen bg-black flex items-center justify-center text-white">
         <div className="max-w-2xl w-full bg-[#080808] p-12 md:p-16 rounded-[4rem] border border-primary/30 text-center relative shadow-[0_0_50px_rgba(0,122,255,0.1)]">
           <div className="w-24 h-24 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-10 border border-primary/30">
             <CheckCircle className="w-12 h-12 text-primary" />
           </div>
           <h2 className="outfit text-5xl md:text-7xl font-black italic mb-6 uppercase tracking-tighter text-white">SYSTEMS <br/><span className="gradient-text text-primary">LOCKED</span></h2>
           <p className="text-gray-400 text-xl italic mb-12 leading-relaxed">
-            Report finalized. Jayesh Gangurde and the elite technical division are preparing for your vehicle's recovery.
+            Report finalized for {formData.phone}. Jayesh Gangurde and the elite technical division are preparing for your vehicle's recovery.
           </p>
 
           <div className="bg-black border border-white/5 p-10 rounded-[3rem] mb-12 text-left space-y-6">
@@ -80,7 +92,7 @@ const VehicleDamagePart = () => {
             <div className="h-[1px] bg-white/5 w-full"></div>
             <div className="flex items-center gap-4 text-gray-500">
               <Truck size={20} className="text-accent" />
-              <p className="text-xs font-bold uppercase tracking-widest leading-none">Retrieval unit dispatched within 24 hours.</p>
+              <p className="text-xs font-bold uppercase tracking-widest leading-none">Retrieval unit dispatched to {formData.location}.</p>
             </div>
           </div>
 
@@ -96,7 +108,7 @@ const VehicleDamagePart = () => {
   }
 
   return (
-    <div className="pt-32 pb-20 px-6 md:px-10 min-h-screen bg-black text-white">
+    <div className="pt-32 pb-20 px-6 md:px-10 min-h-screen bg-black text-white relative overflow-hidden">
       <div className="container mx-auto max-w-5xl">
 
         <header className="mb-20 text-center relative">
@@ -108,37 +120,36 @@ const VehicleDamagePart = () => {
             DAMAGE <span className="text-accent">REPORT</span>
           </h1>
           <p className="dmg-reveal text-gray-400 text-lg md:text-2xl max-w-3xl mx-auto italic font-light leading-relaxed">
-            "We reverse the destruction. Provide the operational data below for a master-class technical recovery."
+            "We reverse the destruction. Tell us what is damaged and what needs repair for a master-class technical recovery."
           </p>
         </header>
 
         <form onSubmit={handleSubmit} className="form-container dmg-reveal bg-[#080808] p-8 md:p-20 rounded-[5rem] border border-white/5 space-y-16 shadow-2xl relative">
 
-          {/* Scenario Selection */}
           <div className="space-y-8">
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 text-white">
               <Clipboard className="text-primary" size={20} />
-              <h2 className="outfit text-3xl font-black italic uppercase tracking-tighter">01. Incident Data</h2>
+              <h2 className="outfit text-3xl font-black italic uppercase tracking-tighter">01. What is the Damage?</h2>
             </div>
             <div className="space-y-4">
-              <label className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-600 ml-2">Describe Scenario</label>
+              <label className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-600 ml-2 text-white">Incident Description</label>
               <textarea
                 required
-                value={scenario}
-                onChange={(e) => setScenario(e.target.value)}
-                placeholder="Ex: Front-end collision at 40km/h, battery compartment intact, structural damage to hood..."
+                name="scenario"
+                value={formData.scenario}
+                onChange={handleInputChange}
+                placeholder="Ex: Front hood crushed, left headlight destroyed, battery warning lights active..."
                 className="w-full bg-black border border-white/10 p-8 rounded-[2.5rem] focus:border-accent outline-none transition-all h-48 italic text-gray-300 text-sm leading-relaxed"
               ></textarea>
             </div>
           </div>
 
-          {/* Specialized Repairs */}
           <div className="space-y-10">
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 text-white">
               <Settings className="text-primary" size={20} />
-              <h2 className="outfit text-3xl font-black italic uppercase tracking-tighter">02. Required Ops</h2>
+              <h2 className="outfit text-3xl font-black italic uppercase tracking-tighter">02. What to Repair?</h2>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 text-white">
               {repairOptions.map(opt => (
                 <div
                   key={opt.id}
@@ -162,25 +173,40 @@ const VehicleDamagePart = () => {
             </div>
           </div>
 
-          {/* Location & Contact */}
           <div className="space-y-10">
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-4 text-white">
               <Navigation className="text-primary" size={20} />
-              <h2 className="outfit text-3xl font-black italic uppercase tracking-tighter">03. Logistics</h2>
+              <h2 className="outfit text-3xl font-black italic uppercase tracking-tighter text-white">03. Retrieval Logistics</h2>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="space-y-4">
-                <label className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-600 ml-2">Retrieval Point</label>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-white">
+              <div className="space-y-4 text-white">
+                <label className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-600 ml-2 text-white">Retrieval Point</label>
                 <div className="relative">
                   <MapPin className="absolute left-6 top-1/2 -translate-y-1/2 text-primary" size={18} />
-                  <input required type="text" placeholder="Your current city" className="w-full bg-black border border-white/10 p-6 pl-16 rounded-2xl focus:border-primary outline-none text-sm" />
+                  <input
+                    required
+                    type="text"
+                    name="location"
+                    value={formData.location}
+                    onChange={handleInputChange}
+                    placeholder="Your current city"
+                    className="w-full bg-black border border-white/10 p-6 pl-16 rounded-2xl focus:border-primary outline-none text-sm text-white"
+                  />
                 </div>
               </div>
               <div className="space-y-4">
-                <label className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-600 ml-2">Secure Link (Phone)</label>
+                <label className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-600 ml-2 text-white">Secure Link (Phone)</label>
                 <div className="relative">
                   <Phone className="absolute left-6 top-1/2 -translate-y-1/2 text-primary" size={18} />
-                  <input required type="tel" placeholder="+91 XXXX XXXX" className="w-full bg-black border border-white/10 p-6 pl-16 rounded-2xl focus:border-primary outline-none text-sm" />
+                  <input
+                    required
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleInputChange}
+                    placeholder="+91 XXXX XXXX"
+                    className="w-full bg-black border border-white/10 p-6 pl-16 rounded-2xl focus:border-primary outline-none text-sm text-white"
+                  />
                 </div>
               </div>
             </div>
@@ -190,16 +216,10 @@ const VehicleDamagePart = () => {
             type="submit"
             className="w-full py-10 bg-accent hover:bg-white hover:text-black text-white font-black text-3xl uppercase tracking-tighter italic rounded-[3rem] transition-all duration-500 shadow-[0_30px_60px_rgba(255,45,85,0.2)] flex items-center justify-center gap-6 group"
           >
-            <span>INITIALIZE RESTORATION</span>
+            <span>SUBMIT REPORT</span>
             <ShieldCheck size={32} className="group-hover:scale-110 transition-transform" />
           </button>
         </form>
-
-        <div className="mt-20 flex justify-center items-center gap-10 opacity-20">
-           <Zap size={20} />
-           <div className="w-40 h-[1px] bg-white"></div>
-           <Zap size={20} />
-        </div>
       </div>
     </div>
   );

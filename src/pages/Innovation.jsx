@@ -1,102 +1,164 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
-import { Cpu, Zap, Radio, Shield, Globe, Wind, ZapOff, Workflow } from 'lucide-react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import {
+  Cpu,
+  Zap,
+  Wind,
+  Globe,
+  ShieldCheck,
+  Layers,
+  Infinity,
+  ChevronRight,
+  Lightbulb,
+  MousePointer2,
+  Gamepad2,
+  Eye,
+  Rocket
+} from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Innovation = () => {
   const containerRef = useRef(null);
+  const horizontalRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const tl = gsap.timeline();
-    tl.from(".inn-reveal", {
-      y: 50,
-      opacity: 0,
-      duration: 1,
-      stagger: 0.2,
-      ease: "power4.out"
-    });
+    let ctx = gsap.context(() => {
+      gsap.from(".reveal-init", {
+        y: 100,
+        opacity: 0,
+        duration: 1.5,
+        stagger: 0.2,
+        ease: "power4.out"
+      });
 
-    gsap.to(".rotating-gear", {
-      rotation: 360,
-      duration: 20,
-      repeat: -1,
-      ease: "none"
-    });
+      const panels = gsap.utils.toArray(".horizontal-panel");
+      gsap.to(panels, {
+        xPercent: -100 * (panels.length - 1),
+        ease: "none",
+        scrollTrigger: {
+          trigger: horizontalRef.current,
+          pin: true,
+          scrub: 1,
+          snap: 1 / (panels.length - 1),
+          end: () => "+=" + horizontalRef.current.offsetWidth
+        }
+      });
+
+      gsap.from(".lab-activity", {
+        scale: 0.9,
+        opacity: 0,
+        duration: 0.8,
+        stagger: 0.1,
+        scrollTrigger: {
+          trigger: ".lab-grid",
+          start: "top 80%"
+        }
+      });
+    }, containerRef);
+    return () => ctx.revert();
   }, []);
 
-  const techs = [
-    { icon: <Cpu />, title: "Neural Processing", desc: "Our V-Core 4.0 chip processes millions of data points per second for unmatched efficiency." },
-    { icon: <Workflow />, title: "Smart Mesh", desc: "A connected ecosystem where your car, home, and city communicate seamlessly." },
-    { icon: <Wind />, title: "Aero-Dynamics", desc: "Active air management systems that reduce drag by 25% at high speeds." },
-    { icon: <Zap />, title: "Quantum Charging", desc: "Experimental charging tech targeting 0 to 100% in under 10 minutes." }
+  const labActivities = [
+    { title: "Hyper-EV Test Drive", type: "FREE", icon: <Rocket className="text-primary" />, desc: "Experience 0-100 in 1.8s first-hand on our private circuit." },
+    { title: "Neural VR Sim", type: "FREE", icon: <Eye className="text-primary" />, desc: "Visualizing the flow of energy in a 360° virtual environment." },
+    { title: "Battery Lab Tour", type: "PAID", icon: <Layers className="text-accent" />, desc: "Deep dive into the chemical engineering of V-Core 3.0 cells." },
+    { title: "Aerodynamics Workshop", type: "PAID", icon: <Wind className="text-accent" />, desc: "Learn how we manipulate air at 300km/h with our engineers." }
   ];
 
   return (
-    <div ref={containerRef} className="pt-32 pb-20 px-6 md:px-10 min-h-screen bg-black text-white">
-      <div className="container mx-auto">
-        <header className="mb-32 text-center relative">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] bg-primary/20 blur-[120px] rounded-full -z-10 animate-pulse"></div>
-          <span className="inn-reveal text-primary font-bold tracking-[0.5em] uppercase text-xs mb-6 block">Lab of the Future</span>
-          <h1 className="inn-reveal outfit text-6xl md:text-[10vw] font-black italic tracking-tighter leading-none uppercase mb-8">
-            PURE <span className="gradient-text">INNOVATION</span>
-          </h1>
-          <p className="inn-reveal text-gray-400 text-xl italic max-w-3xl mx-auto leading-relaxed">
-            "We are not just making vehicles; we are re-inventing how humanity moves through the world."
-          </p>
-        </header>
+    <div ref={containerRef} className="pt-32 pb-20 px-6 md:px-10 min-h-screen bg-black text-white selection:bg-primary overflow-x-hidden">
 
-        {/* Hero Innovation Feature */}
-        <section className="inn-reveal mb-40 relative group">
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/10 to-accent/10 rounded-[4rem] -z-10 group-hover:scale-[1.02] transition-transform duration-1000"></div>
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center p-12 md:p-24 border border-white/5 rounded-[4rem] glass">
-            <div>
-              <h2 className="outfit text-4xl md:text-6xl font-black italic uppercase mb-8 leading-tight">THE <br/> V-CORE <span className="text-primary">3.0</span></h2>
-              <p className="text-gray-400 text-lg italic leading-relaxed mb-10">
-                The heart of every Velocity machine. A solid-state battery architecture that provides 3x the energy density of traditional lithium-ion packs.
-              </p>
-              <div className="flex gap-10">
-                <div className="flex flex-col gap-2">
-                  <p className="text-4xl font-black">98%</p>
-                  <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold">Efficiency</p>
+      {/* SECTION 1: HERO */}
+      <section className="relative h-[80vh] flex flex-col items-center justify-center text-center px-6 overflow-hidden">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_#007AFF08_0%,_transparent_70%)]"></div>
+        <div className="relative z-20 max-w-6xl">
+          <span className="reveal-init inline-block px-4 py-1.5 bg-primary/10 border border-primary/20 rounded-full mb-8 text-[10px] font-black uppercase tracking-[0.4em] text-primary italic">
+            Velocity Innovation Labs
+          </span>
+          <h1 className="reveal-init outfit text-[12vw] md:text-[9vw] font-black italic tracking-tighter leading-[0.85] uppercase mb-10">
+            THE <span className="gradient-text">LABS</span>
+          </h1>
+          <p className="reveal-init text-gray-400 text-lg md:text-2xl max-w-3xl mx-auto italic font-light leading-relaxed">
+            "Testing the limits of possibility. From free test drives to elite engineering workshops."
+          </p>
+        </div>
+      </section>
+
+      {/* SECTION 2: LAB ACTIVITIES (FREE & PAID) */}
+      <section className="py-32 px-6 md:px-20 bg-[#050505] border-y border-white/5">
+        <div className="container mx-auto">
+          <div className="mb-20">
+            <h2 className="outfit text-4xl md:text-6xl font-black italic uppercase tracking-tighter mb-4">Lab Activities</h2>
+            <p className="text-gray-500 italic uppercase tracking-widest text-[10px] font-bold">Public & Member Access Programs</p>
+          </div>
+
+          <div className="lab-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {labActivities.map((lab, i) => (
+              <div key={i} className="lab-activity p-10 bg-[#0a0a0a] border border-white/5 rounded-[3rem] hover:border-primary transition-all relative overflow-hidden group">
+                <div className="absolute top-6 right-8">
+                   <span className={`text-[9px] font-black px-3 py-1 rounded-full border ${lab.type === 'FREE' ? 'border-primary text-primary bg-primary/5' : 'border-accent text-accent bg-accent/5'}`}>
+                     {lab.type}
+                   </span>
                 </div>
-                <div className="w-[1px] h-12 bg-white/10"></div>
-                <div className="flex flex-col gap-2">
-                  <p className="text-4xl font-black">1.2M</p>
-                  <p className="text-[10px] uppercase tracking-widest text-gray-500 font-bold">KM Lifecycle</p>
+                <div className="mb-10 p-4 bg-white/5 rounded-2xl w-fit group-hover:bg-primary transition-all duration-500">
+                   <div className="group-hover:text-white transition-colors">{lab.icon}</div>
                 </div>
+                <h3 className="outfit text-2xl font-black italic uppercase mb-4 tracking-tighter leading-tight">{lab.title}</h3>
+                <p className="text-gray-500 text-sm italic leading-relaxed mb-10">"{lab.desc}"</p>
+                <button onClick={() => navigate('/book')} className="flex items-center gap-3 text-primary font-bold text-[10px] uppercase tracking-widest group-hover:gap-5 transition-all">
+                   Book Slot <ChevronRight size={14} />
+                </button>
               </div>
-            </div>
-            <div className="relative flex justify-center">
-               <div className="w-full aspect-square bg-[#0a0a0a] rounded-full border border-white/10 flex items-center justify-center p-10 overflow-hidden">
-                  <div className="rotating-gear absolute inset-0 opacity-5 border-[20px] border-dashed border-white rounded-full"></div>
-                  <Zap size={120} className="text-primary animate-bounce shadow-[0_0_50px_rgba(0,122,255,0.5)]" />
-               </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* SECTION 3: HORIZONTAL MILESTONE SCROLL */}
+      <section ref={horizontalRef} className="bg-black overflow-hidden h-screen flex items-center">
+        <div className="flex h-full w-[300vw]">
+          <div className="horizontal-panel w-screen h-full flex items-center justify-center px-6 md:px-20 border-r border-white/5 relative bg-[#020202]">
+            <span className="absolute top-20 left-20 text-[20vw] font-black italic text-white/5 select-none pointer-events-none">2024</span>
+            <div className="max-w-4xl relative z-10">
+              <h3 className="outfit text-5xl md:text-8xl font-black italic uppercase leading-none tracking-tighter mb-8 text-primary italic">V-CORE HUB</h3>
+              <p className="text-gray-400 text-2xl italic leading-relaxed">Opening the foundation of our solid-state power research in the heart of Nashik.</p>
             </div>
           </div>
-        </section>
-
-        {/* Future Tech Grid */}
-        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-40">
-          {techs.map((t, i) => (
-            <div key={i} className="inn-reveal p-10 bg-[#080808] border border-white/5 rounded-[3rem] hover:border-primary/30 transition-all group">
-              <div className="mb-8 p-4 bg-primary/10 rounded-2xl w-fit group-hover:bg-primary transition-all">
-                <div className="text-primary group-hover:text-white transition-colors">{t.icon}</div>
-              </div>
-              <h3 className="outfit text-2xl font-black italic mb-4 uppercase tracking-tighter">{t.title}</h3>
-              <p className="text-gray-500 text-sm italic leading-relaxed">"{t.desc}"</p>
+          <div className="horizontal-panel w-screen h-full flex items-center justify-center px-6 md:px-20 border-r border-white/5 relative bg-[#050505]">
+            <span className="absolute top-20 left-20 text-[20vw] font-black italic text-white/5 select-none pointer-events-none">2025</span>
+            <div className="max-w-4xl relative z-10">
+              <h3 className="outfit text-5xl md:text-8xl font-black italic uppercase leading-none tracking-tighter mb-8 text-secondary italic">NEURAL LINK</h3>
+              <p className="text-gray-400 text-2xl italic leading-relaxed">The first fleet capable of L4 autonomous synchronization across urban meshes.</p>
             </div>
-          ))}
-        </section>
+          </div>
+          <div className="horizontal-panel w-screen h-full flex items-center justify-center px-6 md:px-20 border-r border-white/5 relative bg-black">
+            <span className="absolute top-20 left-20 text-[20vw] font-black italic text-white/5 select-none pointer-events-none">2026</span>
+            <div className="max-w-4xl relative z-10">
+              <h3 className="outfit text-5xl md:text-8xl font-black italic uppercase leading-none tracking-tighter mb-8 text-accent italic">ZERO CARBON</h3>
+              <p className="text-gray-400 text-2xl italic leading-relaxed">Opening the world's first fully solar-powered hyper-factory.</p>
+            </div>
+          </div>
+        </div>
+      </section>
 
-        {/* Global Impact */}
-        <section className="inn-reveal text-center py-32 bg-gradient-to-b from-transparent via-primary/5 to-transparent rounded-[4rem] border-y border-white/5">
-           <Globe className="text-primary mx-auto mb-8 animate-spin-slow" size={64} />
-           <h2 className="outfit text-5xl md:text-8xl font-black italic tracking-tighter uppercase mb-8">CLEANER <br/> <span className="gradient-text">PLANET</span></h2>
-           <p className="text-gray-400 text-xl italic max-w-2xl mx-auto mb-16">
-             Velocity Motors is on track to reduce India's carbon footprint by 1 million tons of CO2 by 2026.
-           </p>
-           <button className="btn-primary px-16">VIEW SUSTAINABILITY REPORT</button>
-        </section>
-      </div>
+      {/* SECTION 4: CTAs */}
+      <section className="py-40 bg-[#050505] text-center border-t border-white/5">
+        <div className="container mx-auto px-6">
+          <Gamepad2 className="mx-auto mb-10 text-primary animate-pulse" size={64} />
+          <h2 className="outfit text-5xl md:text-[10vw] font-black italic uppercase tracking-tighter leading-none mb-12 text-white">
+            PLAY THE <span className="gradient-text text-primary">FUTURE</span>
+          </h2>
+          <div className="flex flex-col sm:flex-row justify-center gap-6">
+            <button onClick={() => navigate('/parents')} className="btn-primary px-16 py-6 text-xl shadow-[0_20px_50px_rgba(0,122,255,0.3)] text-white">FREE TEST DRIVE</button>
+            <button onClick={() => navigate('/labs')} className="px-16 py-6 border-2 border-white/20 hover:border-white rounded-full font-black text-xs tracking-widest transition-all uppercase italic text-white">Visit Labs</button>
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 };
