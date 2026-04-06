@@ -29,7 +29,7 @@ const team = [
     icon: <Truck className="text-blue-500" />,
     bio: "Expert in vehicle transportation and sales strategies. Krishna bridges the gap between our tech and our elite customers.",
     img: krishnaImg, // Specific Krishna Patil logo
-    connect: "https://github.com/krishna67890",
+    connect: "https://www.linkedin.com/in/krishna-patil-rajput-b66b03340",
     profile: "https://krishna-patil-rajput.vercel.app/",
     color: "from-cyan-600/20 to-cyan-900/20"
   },
@@ -55,8 +55,6 @@ const team = [
     icon: <TrendingUp className="text-orange-500" />,
     bio: "The mastermind behind market expansion. Aditya analyzes emerging trends to ensure Velocity Motors stays ahead of the electric curve.",
     img: boyImg,
-    connect: "https://www.linkedin.com/",
-    profile: "https://velocitymotors.in/aditya",
     color: "from-orange-600/20 to-orange-900/20"
   },
   {
@@ -65,8 +63,6 @@ const team = [
     icon: <Beaker className="text-indigo-500" />,
     bio: "Driving the future of EV innovation. Vishal oversees the Innovation Lab, turning cutting-edge concepts into road-ready reality.",
     img: boyImg,
-    connect: "https://www.linkedin.com/",
-    profile: "https://velocitymotors.in/vishal",
     color: "from-indigo-600/20 to-indigo-900/20"
   },
   {
@@ -75,8 +71,6 @@ const team = [
     icon: <MessageSquare className="text-pink-500" />,
     bio: "The voice of our riders. Vaibhav ensures every interaction with Velocity Motors is as smooth and powerful as our vehicles.",
     img: boyImg,
-    connect: "https://www.linkedin.com/",
-    profile: "https://velocitymotors.in/vaibhav",
     color: "from-pink-600/20 to-pink-900/20"
   }
 ];
