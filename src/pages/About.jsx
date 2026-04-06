@@ -72,24 +72,46 @@ const About = () => {
             DRIVING THE <br/><span className="gradient-text">REVOLUTION</span>
           </h1>
           <p className="about-title-reveal text-gray-400 text-lg md:text-2xl max-w-3xl italic font-light leading-relaxed">
-            "Velocity Motors was founded to prove that high-performance electric mobility is not a compromise—it is the ultimate upgrade."
+            "Velocity Motors isn't just a dealership; it's a movement born in the heart of Nashik. We are bridging the gap between raw power and zero emissions."
           </p>
         </div>
       </div>
 
-      {/* SECTION 2: THE ALLIANCE & STORY */}
+      {/* SECTION 2: THE VISION VIDEO */}
+      <section className="container mx-auto mb-40">
+        <div className="about-item-reveal relative rounded-[4rem] overflow-hidden aspect-video bg-white/5 border border-white/10 group cursor-pointer">
+          <div className="absolute inset-0 flex items-center justify-center z-10">
+            <div className="w-24 h-24 bg-primary rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shadow-[0_0_50px_rgba(var(--primary-rgb),0.5)]">
+              <Zap className="text-black fill-black" size={32} />
+            </div>
+          </div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-60"></div>
+          <div className="absolute bottom-12 left-12">
+            <p className="text-primary font-black tracking-widest text-xs uppercase mb-2">Vision 2030</p>
+            <h3 className="outfit text-4xl font-black italic uppercase">The Engineering Soul</h3>
+          </div>
+          {/* Placeholder for Video - would be a <video> or <iframe> tag in production */}
+          <img
+            src="https://images.unsplash.com/photo-1593941707882-a5bba14938c7?auto=format&fit=crop&q=80&w=2072"
+            alt="Vision Video Thumbnail"
+            className="w-full h-full object-cover opacity-40 group-hover:scale-105 transition-transform duration-1000"
+          />
+        </div>
+      </section>
+
+      {/* SECTION 3: THE ALLIANCE & STORY */}
       <section className="about-content-section container mx-auto grid grid-cols-1 lg:grid-cols-12 gap-20 items-start mb-40">
         <div className="lg:col-span-7 space-y-12">
           <div className="about-item-reveal">
             <h2 className="outfit text-4xl font-black italic uppercase tracking-tighter mb-6">Our DNA</h2>
             <p className="text-gray-400 text-lg md:text-xl leading-relaxed italic">
-              Founded by **Yash Baviskar** and **Jayesh Gangurde**, Velocity Motors blends visionary leadership with mechanical genius. Our journey began in a Nashik research lab, driven by a simple question: How can we make India's fastest car also its cleanest?
+              From our **Master Garage** to your driveway, we are engineering the soul of Indian transit. Velocity Motors blends visionary leadership with mechanical genius. Our journey began in a Nashik research lab, driven by a simple question: How can we make India's fastest car also its cleanest?
             </p>
           </div>
           <div className="about-item-reveal h-[1px] bg-white/10 w-full"></div>
           <div className="about-item-reveal">
             <p className="text-gray-500 text-lg leading-relaxed italic">
-              Today, supported by a founding alliance including **Krishna Patil**, **Kashyap Jadhav**, and **Shivhar Gundekar**, we operate an end-to-end ecosystem. From hyper-car sales to 24/7 technical restoration, we are the architects of the new electric standard.
+              Today, supported by an expanded founding alliance, we operate an end-to-end ecosystem. From hyper-car sales to 24/7 technical restoration, we are the architects of the new electric standard.
             </p>
           </div>
         </div>
